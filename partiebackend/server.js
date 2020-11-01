@@ -18,6 +18,7 @@ app.use(morgan('dev'))
 app.use(cors())
 
 app.use('/api/user/', require('./routes/auth'));
+app.use('/api/category/', require('./routes/category.route'));
 
 
 app.get('/', (req, res) => {
