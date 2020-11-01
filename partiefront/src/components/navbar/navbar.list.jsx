@@ -1,11 +1,11 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import Button from '../buttons/button.component';
 import NavItem from './navbar.item';
+import Button from '../buttons/button.component';
 import { connect } from 'react-redux';
 import { logout } from '../../data/reducers/auth';
 
-const NavbarList = ({ history, logout, isAuth }) => {
+const NavbarList = ({history, logout, isAuth}) => {
   // make active nav item with text primary
   const isActive = (history, path) => {
     if (history.location.pathname === path) {
@@ -28,15 +28,15 @@ const NavbarList = ({ history, logout, isAuth }) => {
         listStyle={isActive(history, '/dashboard')}
       />
       {isAuth && (
-        <Button
-          title='Signout'
-          moreStyle='hover:text-primary'
-          action={ () => {
-            logout();
+       <Button
+            title='Signout'
+            moreStyle='hover:text-primary'
+          action={()=>{
+           logout();
           }}
-        />
+          />
       )}
-      {!isAuth && (
+      {isAuth && (
         <>
           <Button
             title='Login'
@@ -46,23 +46,15 @@ const NavbarList = ({ history, logout, isAuth }) => {
           />
           <Button
             title='Register'
-            moreStyle='hover:text-primary'
+            moreStyle='bg-primary text-white uppercase w-24 md:ml:6'
             isButton={false}
             href='/register'
           />
-        </>
+          </>
       )}
-      <Button
-        isButton={false}
-        href='/cart'
-        title='cart'
-        moreStyle='bg-primary text-white uppercase w-24 md:ml-6'
-      />
     </ul>
-  );
-};
-
-const mapStateToProps = (state) => ({
-  isAuth: state.auth.isAuthenticated,
-});
-export default connect(mapStateToProps, { logout })(withRouter(NavbarList));
+    )}  
+    const mapStateToProps = (state) => ({
+        isAuth: state.auth.isAuthenticated,
+      });
+      export default connect(mapStateToProps, { logout })(withRouter(NavbarList));
